@@ -1,5 +1,7 @@
 🛍️ Style - E-Commerce Website
 
+https://abraham-santhosh.github.io/ecommerce-website-frontend/
+
 Style is a modern e-commerce platform built with React.js (frontend), Node.js/Express (backend), and MySQL (database).
 It provides a seamless shopping experience with product browsing, cart management, and secure checkout.
 
@@ -99,5 +101,6 @@ CREATE TABLE orders (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
 
 

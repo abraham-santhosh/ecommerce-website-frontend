@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style - E-commerce Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .product-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            flex-shrink: 0;
+            width: 256px; /* A fixed width for horizontal scrolling */
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        /* Hide scrollbar for a cleaner look */
+        .horizontal-scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+        .horizontal-scroll-container {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .nav-item {
+            position: relative;
+            padding: 8px 12px;
+            border-radius: 9999px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .nav-item.active {
+            background: linear-gradient(to right, #e0f2fe, #bfdbfe);
+            color: #1e40af;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#home" id="nav-logo" class="text-2xl font-bold text-gray-900">Style</a>
+
+            <!-- Nav Links (left-aligned) -->
+            <ul class="flex space-x-6 text-gray-600 font-medium absolute left-1/2 -translate-x-1/2">
+                <li><a href="#home" id="nav-home" class="nav-item">HOME</a></li>
+                <li><a href="#men" id="nav-men" class="nav-item">MEN</a></li>
+                <li><a href="#women" id="nav-women" class="nav-item">WOMEN</a></li>
+                <li><a href="#kids" id="nav-kids" class="nav-item">KIDS</a></li>
+            </ul>
+
+            <!-- Icons (right-aligned) -->
+            <div class="flex items-center space-x-4">
+                <a href="#search" id="nav-search">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </a>
+                <a href="#cart" id="nav-cart" class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span id="cart-count" class="absolute -top-1 -right-2 bg-blue-600 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Sections -->
+    <div id="page-content">
+        <!-- Home Page Section -->
+        <section id="home-page" class="page-section">
+            <!-- Hero Section -->
+            <header class="bg-blue-500 text-white py-20 px-4">
+                <div class="container mx-auto text-center">
+                    <h1 class="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-md">Shop the Latest Trends</h1>
+                    <p class="text-xl md:text-2xl mb-8 drop-shadow-sm">Explore our new arrivals and exclusive offers</p>
+                    <a href="#products" class="inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition-colors" onclick="document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' }); return false;">
+                        Shop Now
+                    </a>
+                </div>
+            </header>
+
+            <!-- Products Section -->
+            <!-- Products Section -->
+<main class="p-6">
+  <h2 class="text-2xl font-semibold mb-4">Our Products</h2>
+  <!-- 🔹 This is where products will render -->
+  <div class="products-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+</main>
+            <section id="products-section" class="container mx-auto px-4 py-16">
+                <h2 class="text-3xl font-bold text-center mb-12">Featured Products</h2>
+                <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Product cards will be dynamically inserted here -->
+                </div>
+            </section>
+        </section>
+
+        <!-- Search Page (Hidden by default) -->
+        <section id="search-page" class="page-section hidden">
+            <main class="container mx-auto px-4 py-16">
+                <div class="flex items-center justify-center mb-12">
+                    <input type="text" id="search-input" class="w-full max-w-lg px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search for products...">
+                </div>
+                <div id="search-results-list" class="flex flex-wrap gap-4 py-2 justify-center">
+                    <!-- Search results will be dynamically inserted here -->
+                </div>
+            </main>
+        </section>
+
+
+        <!-- Category Pages (Hidden by default) -->
+        <section id="men-page" class="page-section hidden">
+            <main class="container mx-auto px-4 py-16">
+                <h2 class="text-3xl font-bold text-center mb-12">Men's Collection</h2>
+                <div id="men-product-list" class="flex overflow-x-auto gap-4 py-2 horizontal-scroll-container"></div>
+            </main>
+        </section>
+
+        <section id="women-page" class="page-section hidden">
+            <main class="container mx-auto px-4 py-16">
+                <h2 class="text-3xl font-bold text-center mb-12">Women's Collection</h2>
+                <div id="women-product-list" class="flex overflow-x-auto gap-4 py-2 horizontal-scroll-container"></div>
+            </main>
+        </section>
+
+        <section id="kids-page" class="page-section hidden">
+            <main class="container mx-auto px-4 py-16">
+                <h2 class="text-3xl font-bold text-center mb-12">Kids' Collection</h2>
+                <div id="kids-product-list" class="flex overflow-x-auto gap-4 py-2 horizontal-scroll-container"></div>
+            </main>
+        </section>
+
+        <!-- Login Page (Hidden by default) -->
+        <section id="login-page" class="page-section hidden">
+            <div class="container mx-auto px-4 py-16 flex justify-center items-center h-screen">
+                <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
+                    <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
+                    <form>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="your@email.com">
+                        </div>
+                        <div class="mb-6">
+                            <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+                            <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Password">
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 rounded-md hover:bg-blue-700 transition-colors">Sign In</button>
+                    </form>
+                    <p class="text-center text-sm text-gray-500 mt-4">Don't have an account? <a href="#" class="text-blue-600 hover:underline">Sign Up</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Page (Hidden by default) -->
+        <section id="cart-page" class="page-section hidden">
+            <div class="container mx-auto px-4 py-16">
+                <h2 class="text-3xl font-bold text-center mb-12">Your Shopping Cart</h2>
+                <div id="cart-items" class="bg-white rounded-xl shadow-md p-6 mb-8">
+                    <!-- Cart items will be dynamically inserted here -->
+                    <p id="empty-cart-message" class="text-center text-gray-500">Your cart is empty.</p>
+                </div>
+                <div class="flex justify-between items-center bg-white rounded-xl shadow-md p-6">
+                    <span class="text-2xl font-bold">Total:</span>
+                    <span id="cart-total" class="text-2xl font-bold text-blue-600">₹0.00</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Style</h4>
+                    <p class="text-gray-400">Your one-stop shop for all things fashion. We provide high-quality products at unbeatable prices.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Follow Us</h4>
+                    <ul class="flex justify-center space-x-4">
+                        <li><a href="#" class="hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm1.5-11.724c-.838 0-1.5-.662-1.5-1.5s.662-1.5 1.5-1.5 1.5.662 1.5 1.5-.662 1.5-1.5 1.5zm10.5 11.724h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.75 7 2.476v6.759z"/></svg>
+                        </a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.161 0-5.457 2.417-5.457 5.253 0 .411.045.814.123 1.201-4.532-.224-8.528-2.396-11.218-5.698-.465.795-.733 1.714-.733 2.684 0 1.83 1.05 3.447 2.62 4.398-.971-.03-1.884-.298-2.68-.745v.078c0 2.628 1.879 4.821 4.364 5.312-.44.119-.906.182-1.383.182-.339 0-.668-.033-.993-.095.695 2.052 2.703 3.542 5.086 3.585-1.861 1.341-4.221 2.144-6.787 2.144-.44 0-.874-.025-1.303-.075 2.41 1.542 5.275 2.441 8.361 2.441 9.988 0 16.48-8.155 16.48-15.823 0-.173-.004-.345-.012-.518.667-.48 1.246-1.07 1.706-1.745z"/></svg>
+                        </a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.772 1.691 4.908 4.908.058 1.265.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.148 3.252-1.691 4.772-4.908 4.908-1.265.058-1.645.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.772-1.691-4.908-4.908-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.252 1.691-4.772 4.908-4.908 1.265-.058 1.645-.07 4.85-.07zm0-2.163c-3.616 0-4.067.016-5.484.075-3.619.167-5.185 1.76-5.353 5.353-.059 1.417-.075 1.868-.075 5.484 0 3.616.016 4.067.075 5.484.167 3.619 1.76 5.185 5.353 5.353 1.417.059 1.868.075 5.484.075s4.067-.016 5.484-.075c3.619-.167 5.185-1.76 5.353-5.353.059-1.417.075-1.868.075-5.484s-.016-4.067-.075-5.484c-.167-3.619-1.76-5.185-5.353-5.353-1.417-.059-1.868-.075-5.484-.075zm0 9.5c-2.481 0-4.5 2.019-4.5 4.5s2.019 4.5 4.5 4.5 4.5-2.019 4.5-4.5-2.019-4.5-4.5-4.5zm0 7.5c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3zm9.004-11.914c-.927 0-1.682.756-1.682 1.682s.755 1.682 1.682 1.682 1.682-.756 1.682-1.682-.756-1.682-1.682-1.682z"/></svg>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 mt-8">
+                <p class="text-sm text-gray-400">&copy; 2024 Style. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const products = [
+                { id: 1, name: "Cool Men's Shirt", image: "https://t4.ftcdn.net/jpg/11/85/02/35/240_F_1185023577_dxCCDFa2IKyraqMl7c2QoqJBMERZi2rL.jpg", price: 49.99, category: "men" },
+                { id: 2, name: "Women's T-shirt", image: "https://t3.ftcdn.net/jpg/03/41/54/40/240_F_341544091_SlvFags8TIQf6QMzVI0AaOZm4TPWMTze.jpg", price: 29.99, category: "women" },
+                { id: 3, name: "Fun Kids T-shirt", image: "https://t3.ftcdn.net/jpg/06/09/74/88/240_F_609748853_1bgPJkwInUAH9TILIQclrma2aMebkY4k.jpg", price: 24.99, category: "kids" },
+                { id: 4, name: "Stylish Jeans", image: "https://as1.ftcdn.net/v2/jpg/04/83/25/50/1000_F_483255019_m1r1ujM8EOkr8PamCHF85tQ0rHG3Fiqz.jpg", price: 59.99, category: "men" },
+                { id: 5, name: "Formal Blazer", image: "https://t4.ftcdn.net/jpg/14/80/09/57/240_F_1480095795_1nseO3wT9YSUbleC6ZpSvkwQlInolGTI.jpg", price: 129.99, category: "men" },
+                { id: 6, name: "Summer Skirt", image: "https://t4.ftcdn.net/jpg/13/96/19/33/240_F_1396193326_S85v7fOiwto2P1g48O8DCjSYCXhZbCSL.jpg", price: 34.99, category: "women" },
+                { id: 7, name: "Kids' Hoodie", image: "https://t3.ftcdn.net/jpg/14/55/80/22/240_F_1455802297_L8gOPIIFsfuYLD4YI7dGdJy0ky8IJrxh.jpg", price: 29.99, category: "kids" },
+                { id: 8, name: "Graphic Hoodie", image: "https://t4.ftcdn.net/jpg/13/95/84/81/240_F_1395848186_D1xGFpIUPHKOig5mRGau6MWXRhqHsapz.jpg", price: 59.99, category: "men" }
+            ];
+
+            const navLinks = document.querySelectorAll('nav a');
+            const navItems = document.querySelectorAll('.nav-item');
+            const pageSections = document.querySelectorAll('.page-section');
+            const productListElement = document.getElementById('product-list');
+            const cartCountElement = document.getElementById('cart-count');
+            const cartItemsElement = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            const searchInput = document.getElementById('search-input');
+            const searchResultsList = document.getElementById('search-results-list');
+
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+            function renderProducts(category = null) {
+                let filteredProducts = products;
+                if (category) {
+                    filteredProducts = products.filter(p => p.category === category);
+                }
+                
+                let productListHtml = '';
+                if (filteredProducts.length === 0) {
+                    productListHtml = '<p class="text-center text-gray-500 col-span-full">No products found in this category.</p>';
+                } else {
+                    productListHtml = filteredProducts.map(product => `
+                        <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-lg font-semibold mb-2">${product.name}</h3>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xl font-bold text-blue-600">₹${(product.price * 83.3).toFixed(2)}</span>
+                                    <button class="add-to-cart-btn bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition-colors" data-id="${product.id}">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                
+                const targetListId = category ? `${category}-product-list` : 'product-list';
+                const targetListElement = document.getElementById(targetListId);
+                if (targetListElement) {
+                    targetListElement.innerHTML = productListHtml;
+                }
+            }
+
+            function updateCartCount() {
+                const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountElement.textContent = totalCount;
+            }
+
+            function renderCart() {
+                cartItemsElement.innerHTML = '';
+                if (cartItems.length === 0) {
+                    cartItemsElement.innerHTML = `<p id="empty-cart-message" class="text-center text-gray-500">Your cart is empty.</p>`;
+                    cartTotalElement.textContent = '₹0.00';
+                } else {
+                    let total = 0;
+                    cartItems.forEach(item => {
+                        const inrPrice = item.price * 83.3;
+                        total += inrPrice * item.quantity;
+                        const cartItemHtml = `
+                            <div class="flex items-center justify-between border-b border-gray-200 py-4 last:border-b-0">
+                                <div class="flex items-center space-x-4">
+                                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-md object-cover">
+                                    <div>
+                                        <p class="font-semibold">${item.name}</p>
+                                        <p class="text-gray-500 text-sm">₹${inrPrice.toFixed(2)} x ${item.quantity}</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="minus-from-cart-btn bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-lg font-bold hover:bg-red-600 transition-colors" data-id="${item.id}">-</button>
+                                    <span class="font-bold text-gray-800">₹${(inrPrice * item.quantity).toFixed(2)}</span>
+                                </div>
+                            </div>
+                        `;
+                        cartItemsElement.innerHTML += cartItemHtml;
+                    });
+                    cartTotalElement.textContent = `₹${total.toFixed(2)}`;
+                }
+            }
+
+            function renderSearchResults(query) {
+                const normalizedQuery = query.toLowerCase();
+                const filteredProducts = products.filter(p => p.name.toLowerCase().includes(normalizedQuery));
+                
+                let resultsHtml = '';
+                if (filteredProducts.length === 0) {
+                    resultsHtml = '<p class="text-center text-gray-500 col-span-full">No products found for this search.</p>';
+                } else {
+                    resultsHtml = filteredProducts.map(product => `
+                        <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col justify-between">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-lg font-semibold mb-2">${product.name}</h3>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xl font-bold text-blue-600">₹${(product.price * 83.3).toFixed(2)}</span>
+                                    <button class="add-to-cart-btn bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition-colors" data-id="${product.id}">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                
+                searchResultsList.innerHTML = resultsHtml;
+            }
+
+            function showPage(pageId) {
+                pageSections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+                document.getElementById(pageId).classList.remove('hidden');
+
+                // Update active link class
+                navItems.forEach(item => item.classList.remove('active'));
+                const activeLink = document.querySelector(`#nav-${pageId.replace('-page', '')}`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+
+                // Special handling for category pages
+                if (['men-page', 'women-page', 'kids-page'].includes(pageId)) {
+                    const category = pageId.split('-')[0];
+                    renderProducts(category);
+                }
+            }
+
+            // Initial render
+            renderProducts();
+            updateCartCount();
+            showPage('home-page');
+
+            // Event listeners for navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetLink = e.target.closest('a');
+                    if (!targetLink || !targetLink.id) {
+                        return;
+                    }
+
+                    let pageId;
+                    const linkId = targetLink.id;
+                    if (linkId === 'nav-logo' || linkId === 'nav-home') {
+                        pageId = 'home-page';
+                    } else if (linkId === 'nav-search') {
+                        pageId = 'search-page';
+                        setTimeout(() => searchInput.focus(), 100);
+                    } else {
+                        const pageName = linkId.split('-')[1];
+                        pageId = `${pageName}-page`;
+                    }
+                    showPage(pageId);
+                });
+            });
+
+            // Event listener for search input
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    renderSearchResults(e.target.value);
+                }
+            });
+
+            // Event listener for "add to cart" buttons
+            document.getElementById('page-content').addEventListener('click', (e) => {
+                if (e.target.classList.contains('add-to-cart-btn')) {
+                    const productId = parseInt(e.target.dataset.id);
+                    const product = products.find(p => p.id === productId);
+
+                    let existingItem = cartItems.find(item => item.id === productId);
+                    if (existingItem) {
+                        existingItem.quantity++;
+                    } else {
+                        cartItems.push({ ...product, quantity: 1 });
+                    }
+                    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                    updateCartCount();
+
+                    // Optional: Visual feedback
+                    e.target.textContent = 'Added!';
+                    e.target.disabled = true;
+                    setTimeout(() => {
+                        e.target.textContent = 'Add to Cart';
+                        e.target.disabled = false;
+                    }, 1000);
+                } else if (e.target.classList.contains('minus-from-cart-btn')) {
+                    const productId = parseInt(e.target.dataset.id);
+                    const existingItemIndex = cartItems.findIndex(item => item.id === productId);
+
+                    if (existingItemIndex > -1) {
+                        cartItems[existingItemIndex].quantity--;
+                        if (cartItems[existingItemIndex].quantity <= 0) {
+                            cartItems.splice(existingItemIndex, 1);
+                        }
+                        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                        updateCartCount();
+                        renderCart();
+                    }
+                }
+            });
+            
+            // Render cart when navigating to cart page
+            document.getElementById('nav-cart').addEventListener('click', () => {
+                renderCart();
+            });
+
+        });
+    </script>
+   <script src="script.js"></script> 
+</body>
+</html>

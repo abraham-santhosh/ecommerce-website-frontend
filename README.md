@@ -34,23 +34,7 @@ Node.js
 Express.js
 
 MySQL
-📂 Project Structure
-style/
-├── backend/        # Node.js + Express + MySQL API
-│   ├── config/     # Database connection
-│   ├── routes/     # API endpoints
-│   ├── models/     # Database models
-│   └── server.js   # Entry point
-│
-├── frontend/       # React app
-│   ├── public/
-│   ├── src/
-│   │   ├── components/  # Reusable UI components
-│   │   ├── pages/       # Product, Cart, Checkout
-│   │   └── App.js
-│   └── package.json
-│
-└── README.md
+
 
 ⚡ Installation & Setup
 1. Clone Repository
@@ -115,4 +99,5 @@ CREATE TABLE orders (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
 
